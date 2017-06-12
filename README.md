@@ -67,26 +67,26 @@ knife bootstrap  10.126.34.0 --sudo  -x  ec2-user  -i /root/Chefkey.pem  -N "nod
 •	By using Docker file to create ChefDk image, copying a chef-starter   from S3 bucket, unzip the starterkit and knife configure with the chef server.
 
 	Vi  Dockerfile
-                     FROM   Ubuntu
-                     RUN    Wget  https://packages.chef.io/files/stable/chefdk/1.4.3/ubuntu/16.04/chefdk_1.4.3-1_amd64.deb  
-                                 && apt-get install chefdk_1.4.3-1_amd64.deb && apat-get install vim –y 
-                     CMD    aws  s3  cp  s3://chef_bucket/ chef-starter.zip     /root
-                     UNZIP  chef-starter.zip
-                     CMD     knife  configure client chef-repo
+  FROM   Ubuntu
+  RUN    Wget  https://packages.chef.io/files/stable/chefdk/1.4.3/ubuntu/16.04/chefdk_1.4.3-1_amd64.deb  
+         && apt-get install chefdk_1.4.3-1_amd64.deb && apat-get install vim –y 
+  CMD    aws  s3  cp  s3://chef_bucket/ chef-starter.zip     /root
+  UNZIP  chef-starter.zip
+  CMD     knife  configure client chef-repo
 
 •	To Create Docker container and Login into that container.
                Docker run  -dti –name   test  -v  /root/ops:/tmp     ubuntu  /bin/bash
                Docker attach test 
 •	To Create Directory and move to /Ops/ path.
 Mkdir    ops
-                Mv      /root/task.sh  /root/ops
+Mv      /root/task.sh  /root/ops
 
   • Bake the Shell script created in step3 into the Docker container.
 
 •	To install Python in Docker container after configure bake shell in our container.
       python  -V
-                   ubuntu > sudo apt-get install python
-                  > bake.py check
+      ubuntu > sudo apt-get install python
+     > bake.py check
 
 •	Create a bake repository on the directory you are in now
 
@@ -107,14 +107,14 @@ Mkdir    ops
 •	Using bake file to copy the task.ssh file
 
  vi  bake.py
-               import shutil
-               shutil.copy2('/ops/task.sh',   ‘/tmp/task.sh')
+ import shutil
+ shutil.copy2('/ops/task.sh',   ‘/tmp/task.sh')
 
 •	To Create new Demo shell file and run the bake file by Vi Editor.
 •	To Create demo.sh file and run the ec2 instance and bootstrap node using bake.py
 
 	vi  demo.sh
-                            # !/bin/bash
-                             python bake.py
-                             execute shell script : ./demo.sh
+  # !/bin/bash
+  python bake.py
+ execute shell script : ./demo.sh
 
