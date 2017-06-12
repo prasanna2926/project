@@ -1,0 +1,10 @@
+package  'java'  do 
+version ‘8.0’ 
+action  :install
+end
+package “tomcat” do
+action : install
+end	
+execute 'tomcat_configtest'  do
+command '/usr/bin/.startup.sh'
+end
