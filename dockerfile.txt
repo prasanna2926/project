@@ -1,0 +1,7 @@
+FROM   Ubuntu
+RUN    Wget  https://packages.chef.io/files/stable/chefdk/1.4.3/ubuntu/16.04/chefdk_1.4.3-1_amd64.deb  
+       && apt-get install chefdk_1.4.3-1_amd64.deb && apat-get install vim –y 
+CMD    aws  s3  cp  s3://chef_bucket/ chef-starter.zip     /root
+UNZIP  chef-starter.zip
+CMD     knife  configure client chef-repo
+
