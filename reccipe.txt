@@ -1,0 +1,4 @@
+
+    Cookbook_file  “ /user/bin” do
+    source “tomcat”
+    end
